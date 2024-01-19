@@ -110,6 +110,11 @@ func (l Limits) AsContainerResources() container.Resources {
 		BlkioWeight:       l.IoWeight,
 		OomKillDisable:    &l.OOMDisabled,
 		PidsLimit:         &pids,
+		Ulimits: []*units.Ulimit{{
+			Name: "nofile",
+			Soft: 1024,
+			Hard: 1024,
+			}},
 	}
 
 	// If the CPU Limit is not set, don't send any of these fields through. Providing
